@@ -1,12 +1,5 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Added Authentication {auth} from Firebase to our app by adding build project from firebase console.it is easy to follow the docs and implement each step.
+ *First signUp functionality then proceesed by signIn when the button clicked and based on that authontication is completed and in firebase console authentication page of our project we can see the user details.
+ #Then we will get an authentication function from firebase in which it knows any action triggered signIn or signOut.we will get output then based on that we can navigate the user to main page .

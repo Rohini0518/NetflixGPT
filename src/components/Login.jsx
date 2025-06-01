@@ -11,6 +11,7 @@ const Login = () => {
   const password = useRef(null);
   const [errorValidation, setErrorValidation] = useState("");
   const [isSignIn, setIsSignIn] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handelButtonClick = () => {
     const validation = ValidationUi(
@@ -39,8 +40,12 @@ const Login = () => {
         });
     } else {
       console.log("else sigin ");
-      
-      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
@@ -99,7 +104,7 @@ const Login = () => {
             />
           </div>
 
-          <div>
+          <div className="relative">
             <label
               htmlFor="password"
               className="block text-xl font-medium text-gray-300 mb-2"
@@ -107,12 +112,18 @@ const Login = () => {
               Password
             </label>
             <input
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               ref={password}
               className="w-full px-3 py-2 bg-gray-800 border border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
               placeholder="Enter your password"
             />
+            <span
+              onClick={() => setShowPassword((prev) => !prev)}
+              className="absolute bottom-2 right-3 flex items-center text-white cursor-pointer"
+            >
+              {showPassword ? "🙉" : "🙈"}
+            </span>
           </div>
           <button
             onClick={handelButtonClick}

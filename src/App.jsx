@@ -1,12 +1,7 @@
-import React from "react";
-import './App.css'
-import Body from  "./components/Body"
-import Login from './components/login'
+import "./App.css";
+import Body from "./components/Body";
 function App() {
-
-  return (
-    <Body/>
-  )
+  return <Body />;
 }
 
-export default App
+export default App;
