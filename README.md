@@ -5,3 +5,5 @@ Added Authentication {auth} from Firebase to our app by adding build project fro
  #Then we will get an authentication function from firebase in which it knows any action triggered signIn or signOut.we will get output then based on that we can navigate the user to main page .
  *now created a redux store to manage user state to add or remove userdata from data when sigin and signout. with addUser and removeUser reducers
  *Added Header in layout component added outlet and managed header,then after sigin in onAuthchange() function is cleaned from useEffect i.e unsubcribed it .
+ #from TMDB database we are taking movies details
+ 

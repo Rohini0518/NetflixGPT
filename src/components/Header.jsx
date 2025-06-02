@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { NetflixLogo } from "../utils/constants";
-import Login from "./Login";
+import { NETFLIX_LOGO } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { onAuthStateChanged, signOut } from "firebase/auth";
@@ -46,7 +45,7 @@ const Header = () => {
       <div className=" flex px-2 rounded-sm justify-between items-center m-2 bg-black w-full">
         <img
           className=" top-4 left-4 w-32 z-10"
-          src={NetflixLogo}
+          src={NETFLIX_LOGO}
           alt="Netflix"
         />
         {isSignIn && (

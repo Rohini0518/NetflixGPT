@@ -9,7 +9,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { addUser } from "../utils/userSlice";
 import { useDispatch } from "react-redux";
-import { landingImg } from "../utils/constants";
+import { LANDING_IMG } from "../utils/constants";
 
 const Login = () => {
   const email = useRef(null);
@@ -85,7 +85,7 @@ const Login = () => {
     <div className=" flex items-center w-[50%]  justify-center  px-4">
       <img
         className="absolute inset-0 w-full h-full object-cover z-0"
-        src={landingImg}
+        src={LANDING_IMG}
         alt="bgImg"
       />
       <div className="absolute inset-0 flex justify-center items-center z-10">
