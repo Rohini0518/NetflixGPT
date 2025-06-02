@@ -1,13 +1,20 @@
-import { Routes,Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Header from "./header";
-const Body=()=>{
-    return(
-        <>
-        <Routes>
-            <Route path="/" element={<Header/>}/>
-            {/* <Route path="/login" element={<Login/>}/> */}
-        </Routes>
-        </>
-    )
-}
+import WelcomePage from "../pages/WelcomePage";
+import Login from "./Login";
+import Layout from "./Layout";
+
+const Body = () => {
+  
+  return (
+    <>
+      <Routes>
+        <Route element={<Layout/>}>
+        <Route path="/" element={<Login />} />
+        <Route path="/welcomePage" element={<WelcomePage />} />
+        </Route>
+      </Routes>
+    </>
+  );
+};
 export default Body;

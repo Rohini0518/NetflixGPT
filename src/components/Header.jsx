@@ -1,28 +1,71 @@
+import { useNavigate } from "react-router-dom";
+import { NetflixLogo } from "../utils/constants";
 import Login from "./Login";
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { addUser, removeUser } from "../utils/userSlice";
 
 const Header = () => {
+  const [isSignIn, setIsSignIn] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+  const UnSubscribe=  onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        const { uid, email, displayName } = user;
+        setIsSignIn(true);
+        dispatch(addUser({ uid: uid, email: email, displayName: displayName }));
+        navigate("/welcomePage");
+      } else {
+        // User is signed out
+        setIsSignIn(false);
+        navigate("/");
+        dispatch(removeUser());
+      }
+    });
+    return ()=>UnSubscribe();
+  }, []);
+
+  const handleSignOut = () => {
+    console.log("entered to signout");
+    signOut(auth)
+      .then(() => {
+        console.log("signed out succcesfully");
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log("error in signout from auth", error.message);
+      });
+  };
   return (
     <div>
-    <div className="relative h-screen w-full">
-  <img
-    className="absolute inset-0 w-full h-full object-cover z-0"
-    src="https://assets.nflxext.com/ffe/siteui/vlv3/af2fac72-d956-4952-8686-4d45d359d78c/web/IN-en-20250526-TRIFECTA-perspective_5db3e163-56f7-47c7-9a65-b79b9d76bf24_large.jpg"
-    alt="bgImg"
-  />
-
-  <img
-    className="absolute top-4 left-4 w-32 z-10"
-    src="https://help.nflxext.com/helpcenter/OneTrust/oneTrust_production/consent/87b6a5c0-0104-4e96-a291-092c11350111/01938dc4-59b3-7bbc-b635-c4131030e85f/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
-    alt="Netflix"
-  />
-
-  <div className="absolute inset-0 flex justify-center items-center z-10">
-    <Login />
-  </div>
-
-
-</div>
+      <div className=" flex px-2 rounded-sm justify-between items-center m-2 bg-black w-full">
+        <img
+          className=" top-4 left-4 w-32 z-10"
+          src={NetflixLogo}
+          alt="Netflix"
+        />
+        {isSignIn && (
+          <div className="flex justify-between items-center ">
+            <input
+              className="border-2 w-60 text-white rounded-md p-2"
+              type="search"
+              placeholder="Search Movies..."
+            />
+            <button
+              onClick={handleSignOut}
+              className="bg-red-400  p-2 rounded-md text-white text-semibold cursor-pointer"
+            >
+              Sign Out
+            </button>{" "}
+          </div>
+        )}
+      </div>
     </div>
-  )
+  );
 };
 export default Header;
