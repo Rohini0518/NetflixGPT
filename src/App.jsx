@@ -1,16 +1,18 @@
-// import { Provider } from "react-redux";
+import { Provider } from "react-redux";
 import "./App.css";
 // import Body from "./components/Body";
-// import appStore from "./utils/appStore";
-// import CounterDisplay from "./components/others/CounterDisplay";
+import appStore from "./utils/appStore";
 import AddUserForm from "./components/others/AddUserForm";
 
 function App() {
   return (
 <div>
-  {/* // <Provider store={appStore}><Body /></Provider> */}
-
+<Provider store={appStore}>  
+  
+  
   <AddUserForm/>
+</Provider>
+
 </div>
   )
 }

@@ -6,6 +6,8 @@ const appStore = configureStore({
   reducer: {
     user: userReducer,
     movies: moviesReducer,
+        users:userReducer,
+
   },
 });
 export default appStore;

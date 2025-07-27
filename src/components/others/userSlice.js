@@ -1,9 +1,48 @@
-import  { createSlice } from "@reduxjs/toolkit";
+import  { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";  
+
+
+
+export const getUsers=createAsyncThunk("users/getUsers",async ()=>{
+    const response= await axios.get('https://reqres.in/api/users ')
+    return response.data.data;
+})
+
+export const addUser = createAsyncThunk("users/addUser", async (user) => {
+  const response = await axios.post("https://reqres.in/api/users", user);
+  return response.data;
+});
+
+
 
 
 
 const userSlice=createSlice({
     name: 'user',
-    initialState:{},
-    reducers:{}
+    initialState:{
+        users:[],
+        error:null,
+    },
+    reducers:{},
+    extraReducers:(builder)=>{
+
+        builder.addCase(getUsers.pending,(state)=>{})
+    builder.addCase(getUsers.fulfilled,(state,action)=>{
+        state.users=action.payload;
+        state.error=null; 
+    })
+    builder.addCase(getUsers.rejected,(state,action)=>{})
+
+
+        builder.addCase(addUser.pending,(state)=>{})
+        builder.addCase(addUser.fulfilled,(state, action)=>{
+            // state will have all initial vales access
+            // action means the returned value from the addUser function
+            //action.payload will have the data returned from the API
+            state.users.push(action.payload)
+        })
+        builder.addCase(addUser.rejected,)
+    }
 })
+
+export default userSlice.reducer;

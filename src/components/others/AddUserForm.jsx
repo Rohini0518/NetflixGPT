@@ -1,4 +1,7 @@
 import { useState } from "react";
+import {addUser} from "./userSlice";
+import { useDispatch } from "react-redux";
+
 
 const AddUserForm = () => {
 
@@ -7,6 +10,20 @@ const [lastName, setLastName] = useState("");
 const [email, setEmail] = useState("");
 const [phone, setPhone] = useState(""); 
 
+const dispatch=useDispatch();
+
+const handleSubmit=(e)=>{
+  e.prevent.default()
+
+  const newUser={
+    first_name: firstName,
+    last_name: lastName,
+    email: email,
+    phone: phone  
+  }
+   
+dispatch(addUser(newUser));
+}
 
   return (
     <>
@@ -41,6 +58,7 @@ const [phone, setPhone] = useState("");
     placeholder="Enter Phone Number"
     onChange={(e)=>setPhone(e.target.value)}/>
     </div>
+    <button type="submit" onClick={(e)=>handleSubmit(e)}>Submit</button>
    </form>
      </>
   )
