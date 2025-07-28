@@ -8,23 +8,23 @@ const AddUserForm = () => {
 const [firstName, setFirstName] = useState("");
 const [lastName, setLastName] = useState("");
 const [email, setEmail] = useState("");
-const [phone, setPhone] = useState(""); 
+const [avatar, setAvatar] = useState(""); 
 
 const dispatch=useDispatch();
 
 const handleSubmit=(e)=>{
-  e.prevent.default()
-
+  e.preventDefault();
   const newUser={
+    id:Date.now(), 
     first_name: firstName,
     last_name: lastName,
     email: email,
-    phone: phone  
+    avatar: avatar  
   }
    
 dispatch(addUser(newUser));
 }
-
+ 
   return (
     <>
    
@@ -52,11 +52,11 @@ dispatch(addUser(newUser));
     onChange={(e)=>setEmail(e.target.value)}/>
     </div>
     <div className="mb-4">
-    <label>phone:</label>
+    <label>avatar:</label>
     <input type="text"
-    value={phone}   
-    placeholder="Enter Phone Number"
-    onChange={(e)=>setPhone(e.target.value)}/>
+    value={avatar}   
+    placeholder="Enter avatar "
+    onChange={(e)=>setAvatar(e.target.value)}/>
     </div>
     <button type="submit" onClick={(e)=>handleSubmit(e)}>Submit</button>
    </form>
